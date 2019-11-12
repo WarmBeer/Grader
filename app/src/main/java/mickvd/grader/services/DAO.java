@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import mickvd.grader.MainActivity;
 import mickvd.grader.R;
@@ -65,7 +66,7 @@ public class DAO extends Observable {
     }
 
     public void sendMeeting(Meeting meeting) {
-        db.collection("cities").document("LA")
+        db.collection("meetings").document("3")
                 .set(meeting)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -83,8 +83,8 @@ public class MeetingsAdapter extends ArrayAdapter<Meeting> implements View.OnCli
 
         viewHolder.txtName.setText(meeting.getTitle());
         viewHolder.txtType.setText(meeting.getTeacherName());
-        viewHolder.txtStartTime.setText(Time.getTime(meeting.getStartDate()));
-        viewHolder.txtEndTime.setText(Time.getTime(meeting.getEndDate()));
+        //viewHolder.txtStartTime.setText(Time.getTime(meeting.getStartTime()));
+        //viewHolder.txtEndTime.setText(Time.getTime(meeting.getEndTime()));
 
         return convertView;
     }

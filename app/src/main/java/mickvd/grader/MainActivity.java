@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
                 Meeting Meeting = meetings.get(position);
 
-                Snackbar.make(view, Meeting.getTitle() + "\n" + Meeting.getTeacherName() + " API: " + Time.getTime(Meeting.getStartDate()), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, Meeting.getTitle() + "\n" + Meeting.getTeacherName() + " API: " + Time.getTime(Meeting.getStartTime()), Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
             }
         });

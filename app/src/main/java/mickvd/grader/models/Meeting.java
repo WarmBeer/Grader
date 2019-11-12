@@ -8,8 +8,9 @@ public class Meeting {
     private String title;
     private String teacherName;
     private String teacherID;
-    private Date startDate;
-    private Date endDate;
+    private Date startTime;
+    private Date endTime;
+    //private Date date;
 
     public String getTitle() {
         return title;
@@ -35,19 +36,27 @@ public class Meeting {
         this.teacherID = teacherID;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartTime(Date startDate) {
+        this.startTime = startTime;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndTime(Date endDate) {
+        this.endTime = endTime;
     }
+
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
 }

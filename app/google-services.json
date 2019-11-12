@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "717421432092",
+    "firebase_url": "https://grader-c099f.firebaseio.com",
+    "project_id": "grader-c099f",
+    "storage_bucket": "grader-c099f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717421432092:android:adcf3811f80a46e00abed9",
+        "android_client_info": {
+          "package_name": "mickvd.grader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717421432092-u9b9i5cp0tsrht21lhv3cfim3vqukaqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mickvd.grader",
+            "certificate_hash": "ed23c3ac6609428f4bfb3cbaa91591b09d98a272"
+          }
+        },
+        {
+          "client_id": "717421432092-dg3vfni8biq1atsmcp9f0lcsm3go0tec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJnh2uJV5Y3nUiIfmeXXZs6w-Npfwn_MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717421432092-dg3vfni8biq1atsmcp9f0lcsm3go0tec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

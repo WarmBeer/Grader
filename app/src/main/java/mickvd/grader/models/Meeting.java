@@ -26,6 +26,7 @@ public class Meeting implements Comparable {
         this.teacherName = teacherName;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
 
     @Override
     public int compareTo(Object o) {

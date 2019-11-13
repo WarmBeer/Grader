@@ -1,18 +1,28 @@
 package mickvd.grader.models;
 
+import com.google.gson.Gson;
+
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Meeting {
+public class Meeting implements Comparable {
 
+    private String ID;
     private String title;
     private String teacherName;
     private String teacherID;
     private Date startDate;
     private Date endDate;
     //private Date date;
+
+
+    @Override
+    public int compareTo(Object o) {
+        Meeting m = (Meeting) o;
+        return startDate.compareTo(m.getStartDate());
+    }
 
     public String getTitle() {
         return title;
@@ -71,5 +81,13 @@ public class Meeting {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

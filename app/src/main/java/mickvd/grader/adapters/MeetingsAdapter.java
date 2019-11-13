@@ -1,39 +1,67 @@
 package mickvd.grader.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import mickvd.grader.R;
 import mickvd.grader.models.Meeting;
-import mickvd.grader.utils.Time;
+
+import static mickvd.grader.utils.DateString.getCurrentDateString;
+import static mickvd.grader.utils.DateString.getDateString;
 
 public class MeetingsAdapter extends BaseAdapter {
 
     private ArrayList<Meeting> data;
     private static LayoutInflater inflater = null;
+    private String date;
     Context context;
 
-    public MeetingsAdapter(Context context, ArrayList<Meeting> data) {
+    public MeetingsAdapter(Context context, ArrayList<Meeting> dataSet, String date) {
         this.context = context;
-        this.data = data;
+        this.data = clean(dataSet);
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.date = date;
     }
 
     public void setDataSet(ArrayList<Meeting> dataSet) {
         this.data.clear();
-        this.data.addAll(dataSet);
+        this.data.addAll(clean(dataSet));
         this.notifyDataSetChanged();
-        System.out.println("Data changed: " + this.data.get(0).getTitle());
+    }
+
+    private ArrayList<Meeting> clean(ArrayList<Meeting> dataSet){
+        ArrayList<Meeting> filteredList = new ArrayList<>();
+
+        for (Meeting m : dataSet) {
+            try {
+                System.out.println(getDateString(m.getStartDate()) + " " + date);
+                if (getDateString(m.getStartDate()).equals(date)) {
+                    filteredList.add(m);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Collections.sort(dataSet, new Comparator<Meeting>(){
+
+            @Override
+            public int compare(Meeting m1, Meeting m2)
+            {
+                return m1.compareTo(m2);
+            }
+        });
+
+        return filteredList;
     }
 
     @Override

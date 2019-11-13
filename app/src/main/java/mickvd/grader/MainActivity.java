@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -25,7 +27,7 @@ import mickvd.grader.services.DAO;
 
 import static mickvd.grader.utils.DateString.getCurrentDateString;
 
-public class MainActivity extends AppCompatActivity implements Observer {
+public class MainActivity extends AppCompatActivity implements Observer, Serializable {
 
     private DAO dao;
     private ArrayList<Meeting> meetings = new ArrayList<>();
@@ -136,13 +138,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Meeting meeting = meetings.get(i);
-                Intent intent = new Intent(getApplicationContext(), MeetingInfo.class);
-                intent.putExtra("meeting", meetings.get(i).getID());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
+                //todo
+                String meetingId = "a7673e73-0336-43e5-8ab2-ed481c00b6b4";
+                intent.putExtra("meetingId",meetingId);
                 startActivity(intent);
-
-
             }
         });
 

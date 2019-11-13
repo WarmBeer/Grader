@@ -1,12 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/listItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/meeting"
+    android:elevation="1dp"
     android:orientation="vertical"
     android:padding="8dp"
-    app:layout_constraintWidth_percent="60"
-    android:elevation="1dp">
+    app:layout_constraintWidth_percent="60">
 
 
     <TextView

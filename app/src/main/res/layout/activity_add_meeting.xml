@@ -33,11 +33,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_description"
+
+            <EditText
+                android:id="@+id/input_teachername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Description" />
+                android:hint="Teacher name"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Start Date Label -->
@@ -101,7 +103,7 @@
             android:padding="12dp"
             android:text="Confirm"/>
 
-        <TextView android:id="@+id/CancelMeeting"
+        <TextView android:id="@+id/cancelMeeting"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"

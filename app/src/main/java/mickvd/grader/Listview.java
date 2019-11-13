@@ -9,5 +9,7 @@ public class Listview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+
+        //Layout item = findViewById(R.id.listItem);
     }
 }

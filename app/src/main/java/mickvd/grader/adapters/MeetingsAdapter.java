@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,77 +16,56 @@ import mickvd.grader.R;
 import mickvd.grader.models.Meeting;
 import mickvd.grader.utils.Time;
 
-public class MeetingsAdapter extends ArrayAdapter<Meeting> implements View.OnClickListener{
+public class MeetingsAdapter extends BaseAdapter {
 
-    private ArrayList<Meeting> dataSet;
-    Context mContext;
+    private ArrayList<Meeting> data;
+    private static LayoutInflater inflater = null;
+    Context context;
 
-    private static class ViewHolder {
-        TextView txtName;
-        TextView txtType;
-        TextView txtStartTime;
-        TextView txtEndTime;
-    }
-
-    public MeetingsAdapter(ArrayList<Meeting> data, Context context) {
-        super(context, R.layout.activity_listview, data);
-        this.dataSet = data;
-        this.mContext = context;
-
+    public MeetingsAdapter(Context context, ArrayList<Meeting> data) {
+        this.context = context;
+        this.data = data;
+        inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public void setDataSet(ArrayList<Meeting> dataSet) {
-        this.dataSet.clear();
-        this.dataSet.addAll(dataSet);
+        this.data.clear();
+        this.data.addAll(dataSet);
         this.notifyDataSetChanged();
-        System.out.println("Data changed: " + this.dataSet.get(0).getTitle());
+        System.out.println("Data changed: " + this.data.get(0).getTitle());
     }
-
-    @Override
-    public void onClick(View v) {
-
-        int position=(Integer) v.getTag();
-        Object object= getItem(position);
-        Meeting meeting=(Meeting) object;
-
-    }
-
-    private int lastPosition = -1;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        Meeting meeting = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        ViewHolder viewHolder; // view lookup cache stored in tag
+        View vi = convertView;
+        if (vi == null)
+            vi = inflater.inflate(R.layout.row, null);
 
-        final View result;
+        TextView Title = vi.findViewById(R.id.title);
+        TextView Start_Time = vi.findViewById(R.id.start_time);
 
-        if (convertView == null) {
-
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.activity_listview, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.txtType = (TextView) convertView.findViewById(R.id.type);
-            viewHolder.txtStartTime = (TextView) convertView.findViewById(R.id.start_time);
-            viewHolder.txtEndTime = (TextView) convertView.findViewById(R.id.end_time);
-
-            result=convertView;
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+        try {
+            Title.setText(data.get(position).getTitle());
+            Start_Time.setText(data.get(position).getStartTime());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return vi;
+    }
 
-        lastPosition = position;
+    @Override
+    public int getCount() {
+        return data.size();
+    }
 
-        viewHolder.txtName.setText(meeting.getTitle());
-        viewHolder.txtType.setText(meeting.getTeacherName());
-        //viewHolder.txtStartTime.setText(Time.getTime(meeting.getStartTime()));
-        //viewHolder.txtEndTime.setText(Time.getTime(meeting.getEndTime()));
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
 
-        return convertView;
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

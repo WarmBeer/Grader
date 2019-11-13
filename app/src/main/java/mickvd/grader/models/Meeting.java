@@ -1,6 +1,8 @@
 package mickvd.grader.models;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Meeting {
@@ -8,8 +10,8 @@ public class Meeting {
     private String title;
     private String teacherName;
     private String teacherID;
-    private Date startTime;
-    private Date endTime;
+    private Date startDate;
+    private Date endDate;
     //private Date date;
 
     public String getTitle() {
@@ -36,20 +38,18 @@ public class Meeting {
         this.teacherID = teacherID;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getStartTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(startDate);
     }
 
-    public void setStartTime(Date startDate) {
-        this.startTime = startTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endDate) {
-        this.endTime = endTime;
+    public String getEndTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(endDate);
     }
 
 //    public Date getDate() {
@@ -59,4 +59,17 @@ public class Meeting {
 //    public void setDate(Date date) {
 //        this.date = date;
 //    }
+
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

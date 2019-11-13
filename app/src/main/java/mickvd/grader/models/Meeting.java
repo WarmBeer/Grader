@@ -12,6 +12,17 @@ public class Meeting {
     private Date endTime;
     //private Date date;
 
+    public Meeting(){
+
+    }
+
+    public Meeting(String title, String teacherName, Date startTime, Date endTime) {
+        this.title = title;
+        this.teacherName = teacherName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public String getTitle() {
         return title;
     }

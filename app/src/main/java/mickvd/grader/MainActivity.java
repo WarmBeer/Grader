@@ -8,12 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,7 +25,7 @@ import mickvd.grader.models.Meeting;
 import mickvd.grader.services.DAO;
 import mickvd.grader.utils.Time;
 
-public class MainActivity extends AppCompatActivity implements Observer {
+public class MainActivity extends AppCompatActivity implements Observer, Serializable {
 
     private TextView mTextMessage;
     ListView listView;
@@ -68,17 +70,17 @@ public class MainActivity extends AppCompatActivity implements Observer {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         meetingsAdapter = new MeetingsAdapter(this.meetings, getApplicationContext());
-        listView = (ListView) findViewById(R.id.simpleListView);
 
+        listView = (ListView) findViewById(R.id.simpleListView);
         listView.setAdapter(meetingsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Meeting Meeting = meetings.get(position);
-
-                Snackbar.make(view, Meeting.getTitle() + "\n" + Meeting.getTeacherName() + " API: " + Time.getTime(Meeting.getStartTime()), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
+                Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
+                //todo
+                String meetingId = "a7673e73-0336-43e5-8ab2-ed481c00b6b4";
+                intent.putExtra("meetingId",meetingId);
+                startActivity(intent);
             }
         });
 

@@ -15,17 +15,15 @@ public class Meeting implements Comparable {
     private String teacherID;
     private Date startDate;
     private Date endDate;
-    //private Date date;
 
-    public Meeting(){
-
-    }
+    public Meeting(){}
 
     public Meeting(String title, String teacherName, Date startTime, Date endTime) {
         this.title = title;
         this.teacherName = teacherName;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDate = startTime;
+        this.endDate = endTime;
+    }
 
     @Override
     public int compareTo(Object o) {

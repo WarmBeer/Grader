@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="Today"
-                    android:textColor="@color/colorAccentLight"
+                    android:textColor="@android:color/black"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 

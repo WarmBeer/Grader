@@ -26,7 +26,7 @@ import mickvd.grader.models.Meeting;
 
 import static android.content.ContentValues.TAG;
 
-public class DAO extends Observable {
+public class MeetingsDAO extends Observable {
 
     private ArrayList<Meeting> meetings = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();

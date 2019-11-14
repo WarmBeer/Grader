@@ -1,115 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMeetingActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!--  Name Label -->
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_title"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="56dp"
+            android:paddingRight="24dp">
+
+            <!--  Name Label -->
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="Title" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
-        <!-- Description Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+                <EditText
+                    android:id="@+id/input_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/input_teachername"
+            <!-- Description Label -->
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Teacher name"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
-        <!-- Start Date Label -->
+                <EditText
+                    android:id="@+id/input_teachername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Teacher name"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
 
-        <!-- End Date Label -->
+            <!-- Start Date Label -->
 
-        <!-- Signup Button -->
+            <!-- End Date Label -->
 
-        <TextView
-            android:id="@+id/startDateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start Date"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            <!-- Signup Button -->
 
-        <TextView
-            android:id="@+id/pickStartDateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/startDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/pickStartTimeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/pickStartDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/endDateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="End Date"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/pickStartTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/pickEndDateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/endDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Date"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/pickEndTimeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/pickEndDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/pickDateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Set Start Date" />
+            <TextView
+                android:id="@+id/pickEndTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/sendMeeting"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:text="Confirm"/>
+            <Button
+                android:id="@+id/pickDateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Start Date" />
 
-        <TextView android:id="@+id/cancelMeeting"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Cancel"
-            android:gravity="center"
-            android:textSize="16dip"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/sendMeeting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="Confirm" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/cancelMeeting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="Cancel"
+                android:textSize="16dip" />
+
+        </LinearLayout>
+    </ScrollView>
+<android.support.design.widget.BottomNavigationView
+android:id="@+id/navigation"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="0dp"
+android:layout_marginEnd="0dp"
+android:background="@color/colorPrimary"
+app:itemTextColor="@color/colorAccent"
+app:itemIconTint="@color/colorAccent"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintRight_toRightOf="parent"
+app:menu="@menu/navigation" >
+</android.support.design.widget.BottomNavigationView>
+</android.support.constraint.ConstraintLayout>

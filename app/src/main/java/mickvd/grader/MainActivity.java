@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
                 //todo
-                String meetingId = "a7673e73-0336-43e5-8ab2-ed481c00b6b4";
+                String meetingId = "1zQPZ8szEFWr3DZjQMI7";
                 intent.putExtra("meetingId",meetingId);
                 startActivity(intent);
             }

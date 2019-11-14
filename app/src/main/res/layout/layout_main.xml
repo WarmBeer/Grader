@@ -7,14 +7,65 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingHorizontal="96dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        app:titleTextColor="@color/colorAccentLight">
+
+        <ImageButton
+            android:id="@+id/previous"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:tint="@color/colorAccent"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="18dp" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="This Week"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="18dp" />
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:tint="@color/colorAccent"
+            tools:layout_editor_absoluteX="388dp"
+            tools:layout_editor_absoluteY="18dp" />
+
+
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -37,7 +88,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -56,7 +107,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -75,7 +126,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -94,7 +145,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -113,7 +164,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -132,7 +183,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -151,7 +202,7 @@
                     android:gravity="center_vertical"
                     android:text="Today"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView

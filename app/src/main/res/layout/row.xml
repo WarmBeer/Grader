@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:minHeight="64dp"
@@ -36,8 +37,10 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="6dp"
-        android:scaleType="center"
-        app:srcCompat="@drawable/rated" />
+        android:foregroundTint="@color/colorAccent"
+        android:paddingHorizontal="12dip"
+        android:scaleType="fitCenter"
+        android:tint="@color/colorAccent"
+        app:srcCompat="@drawable/rated"
+        tools:visibility="visible" />
 </LinearLayout>

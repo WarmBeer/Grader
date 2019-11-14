@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_all"
-        android:icon="@android:drawable/ic_menu_month"
+        android:icon="@drawable/all_icon"
         android:title="All" />
 
     <item
         android:id="@+id/navigation_my"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:icon="@drawable/my_icon"
         android:title="My" />
 
     <item

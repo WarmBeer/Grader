@@ -24,7 +24,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import static mickvd.grader.MainActivity.StudentID;
 
@@ -128,6 +127,7 @@ public class RateMeetingActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("rating", "found rating");
+                                Log.d("StudentID", StudentID);
                                 if (document.getString("studentID").equals(StudentID)) {
                                     rated = true;
                                     System.out.println("You have already rated this meeting!");

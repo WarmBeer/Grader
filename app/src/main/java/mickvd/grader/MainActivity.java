@@ -1,11 +1,13 @@
 package mickvd.grader;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +36,9 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
     private ListView mListView1, mListView2, mListView3, mListView4, mListView5, mListView6, mListView7;
     private TextView text1, text2, text3, text4, text5, text6, text7;
     private MeetingsAdapter day1, day2, day3, day4, day5, day6, day7;
+    private String currentWeek = "This Week";
 
-    public static String StudentID = "1115165";
+    public static String StudentID;
 
     @Override
     public void update(Observable o, Object meetings) {
@@ -130,11 +133,15 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_all:
-
+                    break;
                 case R.id.navigation_my:
-
+                    Intent b = new Intent(MainActivity.this, MyMeetingsActivity.class);
+                    startActivity(b);
+                    break;
                 case R.id.navigation_add:
-
+                    Intent c = new Intent(MainActivity.this, AddMeetingActivity.class);
+                    startActivity(c);
+                    break;
             }
             return false;
         }
@@ -144,6 +151,16 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            StudentID = "";
+        } else{
+            StudentID = extras.getString("studentID");
+        }
+
+        System.out.println("studentID set: " + StudentID);
+
         meetingsDao = new MeetingsDAO();
         setContentView(R.layout.layout_main);
         initDays();

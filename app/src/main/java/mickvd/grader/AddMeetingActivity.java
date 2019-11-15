@@ -20,12 +20,17 @@ import android.widget.TextView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
 import mickvd.grader.models.Meeting;
+import mickvd.grader.utils.Identifier;
 import mickvd.grader.utils.TimePicker;
+
+import static mickvd.grader.MainActivity.StudentID;
 
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -100,18 +105,26 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.YEAR, year);
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        System.out.println("DateString" + currentDateString);
 
         if(setStartDate){
             TextView textView = (TextView) findViewById(R.id.pickStartDateTextView);
             textView.setText(currentDateString);
-            startDate = new Date(year,month,dayOfMonth,0,0);
+            try {
+                startDate = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(currentDateString);
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
             setStartDate = false;
 
         }else{
             TextView textView = (TextView) findViewById(R.id.pickEndDateTextView);
             textView.setText(currentDateString);
-            endDate = new Date(year,month,dayOfMonth,0,0);
-
+            try {
+                endDate = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(currentDateString);
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
             setStartDate = true;
         }
 
@@ -127,7 +140,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         calendar.set(Calendar.MINUTE, minutes);
         calendar.set(Calendar.SECOND, 0);
         String currentTimeString = DateFormat.getTimeInstance().format(calendar.getTime());
-
 
         if(setStartTime){
             TextView textView = (TextView) findViewById(R.id.pickStartTimeTextView);
@@ -167,7 +179,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         Log.d("test", startDate.toString());
         Log.d("test", endDate.toString());
 
-        Meeting meeting = new Meeting(title,teacherName,startDate,endDate);
+        Meeting meeting = new Meeting(meetingId, title, StudentID, teacherName, startDate, endDate);
         db.collection("meetings").document(meetingId).set(meeting);
 
 

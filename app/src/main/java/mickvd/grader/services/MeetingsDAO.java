@@ -47,8 +47,44 @@ public class MeetingsDAO extends Observable {
         }
     }
 
+    public void deleteById(String meetingID) {
+        db.collection("meetings").document(meetingID)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
+
     public void getMeetings() {
         db.collection("meetings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                ArrayList<Meeting> meetings = new ArrayList<>();
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        Meeting meeting = document.toObject(Meeting.class);
+                        meetings.add(meeting);
+                    }
+                    notifyObservers(meetings);
+                } else {
+                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getMeetingsByStudentID(String studentID) {
+        db.collection("meetings")
+                .whereEqualTo("teacherID", studentID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 ArrayList<Meeting> meetings = new ArrayList<>();

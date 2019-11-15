@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Comparator;
 import mickvd.grader.R;
 import mickvd.grader.models.Meeting;
 
+import static mickvd.grader.MainActivity.StudentID;
 import static mickvd.grader.utils.DateString.getCurrentDateString;
 import static mickvd.grader.utils.DateString.getDateString;
 
@@ -72,10 +74,16 @@ public class MeetingsAdapter extends BaseAdapter {
 
         TextView Title = vi.findViewById(R.id.title);
         TextView Start_Time = vi.findViewById(R.id.start_time);
+        ImageButton delete = vi.findViewById(R.id.delete);
 
         try {
             Title.setText(data.get(position).getTitle());
             Start_Time.setText(data.get(position).getStartTime());
+            if (data.get(position).getTeacherID().equals(StudentID)) {
+                System.out.println("matching id: " + data.get(position).getTeacherID() + " " + StudentID);
+                delete.setVisibility(ImageButton.VISIBLE);
+                delete.setTag(data.get(position).getID());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

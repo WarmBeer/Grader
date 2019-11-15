@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyMeetingsActivity"></activity>
+        <activity
+            android:name=".MyMeetingsActivity"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RateMeetingActivity" />
+        <activity
+            android:name=".RateMeetingActivity"
+            android:noHistory="true" />
         <activity
             android:name=".AddMeetingActivity"
             android:label="@string/title_activity_add_meeting"

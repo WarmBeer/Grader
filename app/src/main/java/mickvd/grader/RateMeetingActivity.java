@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,6 +36,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import mickvd.grader.models.Meeting;
+import mickvd.grader.models.Rating;
+
 import static mickvd.grader.MainActivity.StudentID;
 
 public class RateMeetingActivity extends AppCompatActivity {
@@ -46,7 +50,6 @@ public class RateMeetingActivity extends AppCompatActivity {
             Color.parseColor("#D32F2F"), Color.parseColor("#FFEB3B"), Color.parseColor("#4CAF50")
     };
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private boolean rated = false;
     private int red = 0;
     private int yellow = 0;
@@ -72,8 +75,6 @@ public class RateMeetingActivity extends AppCompatActivity {
         final Button redButton = findViewById(R.id.buttonRed);
         final Button yellowButton = findViewById(R.id.buttonYellow);
         final Button greenButton = findViewById(R.id.buttonGreen);
-        View view = this.getWindow().getDecorView();
-
 
         redButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +99,8 @@ public class RateMeetingActivity extends AppCompatActivity {
 
         barLayout = (LinearLayout)this.findViewById(R.id.barLayout);
         ratingLayout = (LinearLayout)this.findViewById(R.id.ratingLayout);
-
         barChart = (BarChart) findViewById(R.id.barchart);
+
 
         getRatings(meetingId);
 
@@ -118,7 +119,6 @@ public class RateMeetingActivity extends AppCompatActivity {
                             SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
 
                             title.setText(document.getString("title"));
-
 
                             if (document.getString("teacherName") == null) {
                                 teacherName.setText("");
@@ -176,7 +176,7 @@ public class RateMeetingActivity extends AppCompatActivity {
 
         BarDataSet bardataset = new BarDataSet(entries, "Cells");
 
-        ArrayList<String> labels = new ArrayList<String>();
+        ArrayList<String> labels = new ArrayList<>();
         labels.add("Bad");
         labels.add("Neutral");
         labels.add("Good");
@@ -224,44 +224,43 @@ public class RateMeetingActivity extends AppCompatActivity {
                 });
     }
 
-    public void rateMeeting(View view,String rating){
-        DocumentReference docRef = db.collection("meetings").document(meetingId);
-        docRef
-                .update("rating",rating)
+    public void rateMeeting(View view, int rating){
+        Rating r = new Rating(meetingId,rating,StudentID);
+        db.collection("ratings").document().set(r)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("test", "Rating toegevoegd aan meeting!");
-                        Snackbar snackbar = Snackbar
-                                .make((getWindow().getDecorView().getRootView()), "Rated!", Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-
+                        added();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("test", "Rating NIET toegevoegd");
-                        Snackbar snackbar = Snackbar
-                                .make((getWindow().getDecorView().getRootView()), "Oops something went wrong!", Snackbar.LENGTH_SHORT);
-                        snackbar.show();
+                        error();
                     }
                 });
+    }
 
+    private void added() {
+        Toast.makeText(this, "Rating sent!", Toast.LENGTH_LONG).show();
+        getRatings(meetingId);
+    }
 
+    private void error() {
+        Toast.makeText(this, "Error sending rating, please try again.", Toast.LENGTH_LONG).show();
     }
 
     public void rateGreen(View view){
-        rateMeeting(view,"Green");
+        rateMeeting(view,2);
     }
 
     public void rateYellow(View view){
-        rateMeeting(view,"Yellow");
+        rateMeeting(view,1);
 
     }
 
     public void rateRed(View view){
-        rateMeeting(view,"Red");
+        rateMeeting(view,0);
 
     }
 }

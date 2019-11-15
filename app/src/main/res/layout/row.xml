@@ -8,6 +8,7 @@
     android:orientation="horizontal"
     android:padding="8dp"
     android:weightSum="20"
+    android:descendantFocusability="blocksDescendants"
     app:layout_constraintWidth_percent="60">
 
 
@@ -32,15 +33,17 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/rated"
+    <ImageButton
+        android:id="@+id/delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:foregroundTint="@color/colorAccent"
+        android:background="@null"
+        android:foregroundTint="@android:color/holo_red_light"
+        android:onClick="deleteMeeting"
         android:paddingHorizontal="12dip"
         android:scaleType="fitCenter"
-        android:tint="@color/colorAccent"
-        app:srcCompat="@drawable/rated"
-        tools:visibility="visible" />
+        android:tint="@android:color/holo_red_light"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/delete" />
 </LinearLayout>

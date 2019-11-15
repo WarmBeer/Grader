@@ -20,8 +20,10 @@ public class Meeting implements Comparable {
 
     public Meeting(){}
 
-    public Meeting(String title, String teacherName, Date startDate, Date endDate) {
+    public Meeting(String id, String title, String teacherID, String teacherName, Date startDate, Date endDate) {
+        this.ID = id;
         this.title = title;
+        this.teacherID = teacherID;
         this.teacherName = teacherName;
         this.startDate = startDate;
         this.endDate = endDate;

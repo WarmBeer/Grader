@@ -28,6 +28,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
             android:tint="@color/colorAccent"
+            android:onClick="previous"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="18dp" />
 
@@ -51,6 +52,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:tint="@color/colorAccent"
+            android:onClick="next"
             tools:layout_editor_absoluteX="388dp"
             tools:layout_editor_absoluteY="18dp" />
 

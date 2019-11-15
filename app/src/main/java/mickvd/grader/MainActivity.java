@@ -1,12 +1,13 @@
 package mickvd.grader;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,29 +18,63 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import mickvd.grader.adapters.MeetingsAdapter;
 import mickvd.grader.models.Meeting;
-import mickvd.grader.services.DAO;
+import mickvd.grader.services.MeetingsDAO;
 
 import static mickvd.grader.utils.DateString.getCurrentDateString;
 
 public class MainActivity extends AppCompatActivity implements Observer, Serializable {
 
-    private DAO dao;
+    private MeetingsDAO meetingsDao;
     private ArrayList<Meeting> meetings = new ArrayList<>();
-    private List<MeetingsAdapter> adapters = new ArrayList<>();
+    private ArrayList<MeetingsAdapter> adapters = new ArrayList<>();
+    private ArrayList<ListView> listviews = new ArrayList<>();
     private ListView mListView1, mListView2, mListView3, mListView4, mListView5, mListView6, mListView7;
     private TextView text1, text2, text3, text4, text5, text6, text7;
     private MeetingsAdapter day1, day2, day3, day4, day5, day6, day7;
+    private String currentWeek = "This Week";
+
+    public static String StudentID;
 
     @Override
     public void update(Observable o, Object meetings) {
         this.meetings = (ArrayList<Meeting>) meetings;
         updateAdapters((ArrayList<Meeting>) meetings);
+    }
+
+    private void initListViews() {
+        mListView1 = (ListView)findViewById(R.id.listView1);
+        mListView2 = (ListView)findViewById(R.id.listView2);
+        mListView3 = (ListView)findViewById(R.id.listView3);
+        mListView4 = (ListView)findViewById(R.id.listView4);
+        mListView5 = (ListView)findViewById(R.id.listView5);
+        mListView6 = (ListView)findViewById(R.id.listView6);
+        mListView7 = (ListView)findViewById(R.id.listView7);
+        listviews.add(mListView1);
+        listviews.add(mListView2);
+        listviews.add(mListView3);
+        listviews.add(mListView4);
+        listviews.add(mListView5);
+        listviews.add(mListView6);
+        listviews.add(mListView7);
+
+        for (ListView lv : listviews) {
+            lv.setAdapter(adapters.get(listviews.indexOf(lv)));
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
+                //todo
+                String meetingId = "1zQPZ8szEFWr3DZjQMI7";
+                intent.putExtra("meetingId",meetingId);
+                startActivity(intent);
+            }
+            });
+        }
     }
 
     private void updateAdapters(ArrayList<Meeting> meetings) {
@@ -97,12 +132,16 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-
-                case R.id.navigation_dashboard:
-
-                case R.id.navigation_notifications:
-
+                case R.id.navigation_all:
+                    break;
+                case R.id.navigation_my:
+                    Intent b = new Intent(MainActivity.this, MyMeetingsActivity.class);
+                    startActivity(b);
+                    break;
+                case R.id.navigation_add:
+                    Intent c = new Intent(MainActivity.this, AddMeetingActivity.class);
+                    startActivity(c);
+                    break;
             }
             return false;
         }
@@ -112,52 +151,36 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dao = new DAO();
+
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            StudentID = "";
+        } else{
+            StudentID = extras.getString("studentID");
+        }
+
+        System.out.println("studentID set: " + StudentID);
+
+        meetingsDao = new MeetingsDAO();
         setContentView(R.layout.layout_main);
         initDays();
         initAdapters();
+        initListViews();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        mListView1 = (ListView)findViewById(R.id.listView1);
-        mListView2 = (ListView)findViewById(R.id.listView2);
-        mListView3 = (ListView)findViewById(R.id.listView3);
-        mListView4 = (ListView)findViewById(R.id.listView4);
-        mListView5 = (ListView)findViewById(R.id.listView5);
-        mListView6 = (ListView)findViewById(R.id.listView6);
-        mListView7 = (ListView)findViewById(R.id.listView7);
-
-        mListView1.setAdapter(day1);
-        mListView2.setAdapter(day2);
-        mListView3.setAdapter(day3);
-        mListView4.setAdapter(day4);
-        mListView5.setAdapter(day5);
-        mListView6.setAdapter(day6);
-        mListView7.setAdapter(day7);
-
-        mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
-                //todo
-                String meetingId = "1zQPZ8szEFWr3DZjQMI7";
-                intent.putExtra("meetingId",meetingId);
-                startActivity(intent);
-            }
-        });
 
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                dao.getMeetings(); // your code
+                meetingsDao.getMeetings(); // your code
                 pullToRefresh.setRefreshing(false);
             }
         });
 
-        dao.addObserver(this);
-        dao.getMeetings();
+        meetingsDao.addObserver(this);
+        meetingsDao.getMeetings();
     }
 
     public static class ListUtils {

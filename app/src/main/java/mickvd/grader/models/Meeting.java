@@ -18,11 +18,7 @@ public class Meeting implements Comparable {
     private String rating;
     //private Date date;
 
-    public Meeting(){
-
-    }
-
-
+    public Meeting(){}
 
     public Meeting(String title, String teacherName, Date startDate, Date endDate) {
         this.title = title;

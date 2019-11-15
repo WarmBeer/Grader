@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
             lv.setAdapter(adapters.get(listviews.indexOf(lv)));
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
-                    //todo
-                    String meetingId = "1";
-                    intent.putExtra("meetingId",meetingId);
-                    startActivity(intent);
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
+                //todo
+                String meetingId = "1zQPZ8szEFWr3DZjQMI7";
+                intent.putExtra("meetingId",meetingId);
+                startActivity(intent);
+            }
             });
         }
     }

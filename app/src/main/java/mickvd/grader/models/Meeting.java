@@ -15,20 +15,30 @@ public class Meeting implements Comparable {
     private String teacherID;
     private Date startDate;
     private Date endDate;
+    private String rating;
+    //private Date date;
 
     public Meeting(){}
 
-    public Meeting(String title, String teacherName, Date startTime, Date endTime) {
+    public Meeting(String title, String teacherName, Date startDate, Date endDate) {
         this.title = title;
         this.teacherName = teacherName;
-        this.startDate = startTime;
-        this.endDate = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
     public int compareTo(Object o) {
         Meeting m = (Meeting) o;
         return startDate.compareTo(m.getStartDate());
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getTitle() {

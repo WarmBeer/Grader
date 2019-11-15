@@ -173,17 +173,20 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         Date startDate = this.startDate;
         Date endDate = this.endDate;
 
-        Log.d("test", meetingId);
-        Log.d("test", title);
-        Log.d("test", teacherName);
-        Log.d("test", startDate.toString());
-        Log.d("test", endDate.toString());
+        if (meetingId != null && title != null && teacherName != null && startDate != null && endDate != null) {
 
-        Meeting meeting = new Meeting(meetingId, title, StudentID, teacherName, startDate, endDate);
-        db.collection("meetings").document(meetingId).set(meeting);
+            Log.d("test", meetingId);
+            Log.d("test", title);
+            Log.d("test", teacherName);
+            Log.d("test", startDate.toString());
+            Log.d("test", endDate.toString());
+
+            Meeting meeting = new Meeting(meetingId, title, StudentID, teacherName, startDate, endDate);
+            db.collection("meetings").document(meetingId).set(meeting);
 
 
-        startActivity(new Intent(AddMeetingActivity.this, MainActivity.class));
+            startActivity(new Intent(AddMeetingActivity.this, MainActivity.class));
+        }
 
     }
 

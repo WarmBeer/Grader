@@ -3,13 +3,11 @@ package mickvd.grader;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements Observer, Seriali
                 @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, RateMeetingActivity.class);
-                String meetingId = ((Meeting) parent.getItemAtPosition(position)).getID();
+                String meetingId = ((Meeting) parent.getItemAtPosition(position)).getId();
                 intent.putExtra("meetingId",meetingId);
                 startActivity(intent);
             }

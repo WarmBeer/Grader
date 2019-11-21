@@ -16,7 +16,6 @@ import mickvd.grader.R;
 import mickvd.grader.models.Meeting;
 
 import static mickvd.grader.MainActivity.StudentID;
-import static mickvd.grader.utils.DateString.getCurrentDateString;
 import static mickvd.grader.utils.DateString.getDateString;
 
 public class MeetingsAdapter extends BaseAdapter {
@@ -54,7 +53,7 @@ public class MeetingsAdapter extends BaseAdapter {
             }
         }
 
-        Collections.sort(dataSet, new Comparator<Meeting>(){
+        Collections.sort(filteredList, new Comparator<Meeting>(){
 
             @Override
             public int compare(Meeting m1, Meeting m2)
@@ -82,7 +81,7 @@ public class MeetingsAdapter extends BaseAdapter {
             if (data.get(position).getTeacherID().equals(StudentID)) {
                 System.out.println("matching id: " + data.get(position).getTeacherID() + " " + StudentID);
                 delete.setVisibility(ImageButton.VISIBLE);
-                delete.setTag(data.get(position).getID());
+                delete.setTag(data.get(position).getId());
             }
         } catch (Exception e) {
             e.printStackTrace();

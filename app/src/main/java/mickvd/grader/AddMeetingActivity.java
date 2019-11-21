@@ -108,23 +108,21 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         System.out.println("DateString" + currentDateString);
 
         if(setStartDate){
+            startDate = new Date();
             TextView textView = (TextView) findViewById(R.id.pickStartDateTextView);
             textView.setText(currentDateString);
-            try {
-                startDate = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(currentDateString);
-            } catch (ParseException pe) {
-                pe.printStackTrace();
-            }
+            startDate.setYear(year -1900);
+            startDate.setMonth(month);
+            startDate.setDate(dayOfMonth);
             setStartDate = false;
 
         }else{
+            endDate = new Date();
             TextView textView = (TextView) findViewById(R.id.pickEndDateTextView);
             textView.setText(currentDateString);
-            try {
-                endDate = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(currentDateString);
-            } catch (ParseException pe) {
-                pe.printStackTrace();
-            }
+            endDate.setYear(year -1900);
+            endDate.setMonth(month);
+            endDate.setDate(dayOfMonth);
             setStartDate = true;
         }
 
@@ -136,7 +134,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onTimeSet(android.widget.TimePicker timePicker, int hour, int minutes){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.HOUR, hour - 12);
         calendar.set(Calendar.MINUTE, minutes);
         calendar.set(Calendar.SECOND, 0);
         String currentTimeString = DateFormat.getTimeInstance().format(calendar.getTime());

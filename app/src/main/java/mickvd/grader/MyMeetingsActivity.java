@@ -49,7 +49,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements Observer, S
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MyMeetingsActivity.this, RateMeetingActivity.class);
-                String meetingId = ((Meeting) parent.getItemAtPosition(position)).getID();
+                String meetingId = ((Meeting) parent.getItemAtPosition(position)).getId();
                 intent.putExtra("meetingId",meetingId);
                 startActivity(intent);
             }
